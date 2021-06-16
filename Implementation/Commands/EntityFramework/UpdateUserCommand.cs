@@ -35,18 +35,12 @@ namespace Implementation.Commands.EntityFramework
 
             user.UserUseCases.Clear();
 
-            foreach (var useCaseId in request.UseCaseIds)
+            foreach (var item in request.UseCaseIds)
             {
-                const string sqlText = @"insert into UserUseCase(UseCaseId, UserId, CreatedAt, IsDeleted, IsActive) values (@useCaseId,@userId,@createdAt,@isDeleted,@isActive);";
-                var parameters = new object[]
+                user.UserUseCases.Add(new UserUseCase
                 {
-                new SqlParameter("@useCaseId", useCaseId),
-                new SqlParameter("@userId", user.Id),
-                new SqlParameter("@createdAt", DateTime.UtcNow),
-                new SqlParameter("@isDeleted", false),
-                new SqlParameter("@isActive", true)
-                };
-                _context.Database.ExecuteSqlRaw(sqlText, parameters);
+                    UseCaseId = item
+                });
             }
             _context.SaveChanges();
         }
