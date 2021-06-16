@@ -1,0 +1,11 @@
+﻿using Application.DataTransfer.Product;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Application
+{
+    public interface IUpdateProductColorCommand : ICommand<RequestProductColorDto>
+    {
+    }
+}
